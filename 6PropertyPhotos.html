@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCF8F4;
+            color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .navbar .nav-links li {
+            margin: 0 10px;
+        }
+        .navbar .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar .nav-links li:last-child {
+            border-right: 2px solid black;
+            padding-right: 10px;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icons i {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        /* Container styles */
+        .container {
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 4px solid #F2F3F5;
+            display: flex;
+            flex-direction: column;
+            height: calc(97vh - 90px); /* Adjust height minus navbar */
+        }
+        .container-navbar {
+            display: flex;
+            background-color: #FCF8F4;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #d6d6d6;
+            flex: 0 0 60px;
+        }
+        .container-navbar div {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+        .container-navbar div:last-child {
+            border-right: none;
+        }
+        .container-navbar div.active {
+            background-color: #e0e0e0;
+            border-bottom: 5px solid #d6d6d6;
+        } 
+        .container-navbar div:first-child {
+            border-bottom: 5px solid #122B49;
+        }
+        .body-content {
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+            flex: 1;
+        }
+
+        h4, p {
+            text-align: center;
+        }
+
+        .upload-container {
+            background-color: #f9f9f9;
+            border: 2px dashed #d3d3d3;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .upload-container i {
+            font-size: 48px;
+            color: #d3d3d3;
+        }
+
+        .upload-container button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .upload-container button:hover {
+            background-color: #0a1c33;
+        }
+
+        #photo-input {
+            display: none;
+        }
+
+        .image-preview {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-preview img {
+            max-width: 100px;
+            max-height: 100px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .lower {
+            display: flex;
+            background-color: #122B49;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+            flex: 0 0 50px;
+        }
+        .lower button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px; 
+            margin: 4px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .help {
+            text-align: center;
+            color: #fff;
+            flex: 1;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .modal-content button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .modal-content button:hover {
+            background-color: #0a1c33;
+        }
+
+        /* Alert box styles */
+        .alert-box {
+            display: none;
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -10%);
+            background-color: #f44336;
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            z-index: 1002;
+            text-align: center;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            .navbar .nav-links li {
+                width: 100%;
+                text-align: left;
+                margin: 5px 0;
+            }
+            .navbar .icons {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: flex-end;
+            }
+            .container {
+                width: 95%;
+            }
+            .container-navbar {
+                flex-wrap: wrap;
+            }
+            .container-navbar div {
+                flex: 1 1 50%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .container-navbar div:last-child {
+                border-bottom: none;
+            }
+            .upload-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .nav-links li a {
+                font-size: 12px;
+            }
+            .navbar .icons i {
+                font-size: 16px;
+            }
+            .upload-container i {
+                font-size: 36px;
+            }
+            .upload-container button {
+                font-size: 12px;
+                padding: 8px 16px;
+            }
+            .modal-content {
+                width: 90%;
+                margin-top: 50%;
+            }
+            .alert-box {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://resource.rentcafe.com/image/upload/x_0,y_0,w_2550,h_1455,c_crop/q_auto,f_auto,c_limit,w_263,h_150/s3/2/102601/the%20dylan_logo%20final%20with%20orange-01%20(1).jpg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#properties">PROPERTIES</a></li>
+                <li><a href="#dashboard">MY DASHBOARD/ACTIVITY</a></li>
+                <li><a href="#list-property">LIST YOUR PROPERTY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#more">MORE</a></li>
+            </ul>
+            <div class="icons">
+                <i class="fas fa-language"></i>
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container-navbar">
+                <div>PROPERTY DETAILS</div>
+                <div style=" border-bottom: 5px solid #122B49;">LOCATION DETAILS</div>
+                <div style=" border-bottom: 5px solid #122B49;">FEATURES & AMENITIES</div>
+                <div style=" border-bottom: 5px solid #122B49;">PRICE DETAILS</div>
+                <div class="active">PROPERTY IMAGES</div>
+            </div>
+            <div class="body-content">
+                <h4>Add Photos / Videos to Attract More Tenants!</h4>
+                <p>Add Photos of living room, bedroom, bathroom, floor, doors, kitchen, balcony, location map, neighborhood, etc.</p>
+                <div class="upload-container">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" id="photo-input" accept="image/*" multiple>
+                    <button onclick="document.getElementById('photo-input').click()">+ Add Photos Now</button>
+                </div>
+                <div class="image-preview" id="image-preview"></div>
+            </div>
+            <div class="lower">
+                <div class="help">Need Help? Call 9999999999</div>
+                <button>Back</button>
+                <button onclick="showModal()">Save Post</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal HTML -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h4>POST PROPERTY ON DYLAN ESTATE?</h4>
+            <button onclick="continueAction()">Continue</button>
+            <p>By continuing you agree to our <a href="#">Terms and Conditions & Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <!-- Alert Box -->
+    <div id="alertBox" class="alert-box">Please add at least one photo before saving the post.</div>
+    <script>
+        function showModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function continueAction() {
+            document.getElementById('myModal').style.display = 'none';
+            window.location.href = '7PropertyPostConfirmationPage.html'; // Redirect to the confirmation page
+        }
+
+        function showAlert() {
+            var alertBox = document.getElementById('alertBox');
+            alertBox.style.display = 'block';
+            setTimeout(function() {
+                alertBox.style.display = 'none';
+            }, 3000);
+        }
+
+        function previewImages(event) {
+            var files = event.target.files;
+            var preview = document.getElementById('image-preview');
+            preview.innerHTML = '';
+            if (files) {
+                for (var i = 0; i < files.length; i++) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        var img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

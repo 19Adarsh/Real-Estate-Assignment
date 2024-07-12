@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+       * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCF8F4;
+            color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+        }
+        .navbar .nav-links li {
+            margin: 0 10px;
+        }
+        .navbar .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar .nav-links li:last-child {
+            border-right: 2px solid black;
+            padding-right: 10px;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icons i {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        /* Container styles */
+        .container {
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 4px solid #F2F3F5;
+            display: flex;
+            flex-direction: column;
+            height: calc(97vh - 90px); /* Adjust height minus navbar */
+        }
+        .container-navbar {
+            display: flex;
+            background-color: #FCF8F4;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #d6d6d6;
+            flex: 0 0 60px;
+        }
+        .container-navbar div {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+        .container-navbar div:last-child {
+            border-right: none;
+        }
+        .container-navbar div.active {
+            background-color: #e0e0e0;
+            border-bottom: 5px solid #d6d6d6;
+        } 
+        .container-navbar div:first-child {
+            border-bottom: 5px solid #122B49;
+        }
+
+        /* Form and content styles */
+        .body-content {
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .section-title {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .checkbox-group, .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .checkbox-group div, .radio-group div {
+            margin-right: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+            flex: 0 1 22%;
+        }
+        .checkbox-group label, .radio-group label {
+            display: block;
+        }
+        .map {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+
+        /* Lower section styles */
+        .lower {
+            display: flex;
+            background-color: #122B49;
+            justify-content: space-around;
+            padding: 10px;
+            align-items: center;
+            flex: 0 0 50px;
+        }
+        .lower button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px; 
+            margin: 4px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .help {
+            text-align: center;
+            color: #fff;
+            flex: 1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+            .navbar .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #FCF8F4;
+                flex-direction: column;
+                text-align: center;
+                z-index: 999;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .navbar .nav-links li {
+                margin: 10px 0;
+            }
+            .container {
+                width: 95%;
+            }
+            .container-navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                overflow-x: auto;
+            }
+            .container-navbar div {
+                flex: 0 1 auto;
+                border: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .container-navbar div.active {
+                background-color: inherit;
+                border-bottom: none;
+            }
+            .body-content {
+                margin: 10px;
+                max-height: unset;
+            }
+            .lower {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0;
+            }
+            .lower button {
+                width: 100%;
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://resource.rentcafe.com/image/upload/x_0,y_0,w_2550,h_1455,c_crop/q_auto,f_auto,c_limit,w_263,h_150/s3/2/102601/the%20dylan_logo%20final%20with%20orange-01%20(1).jpg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#properties">PROPERTIES</a></li>
+                <li><a href="#dashboard">MY DASHBOARD/ACTIVITY</a></li>
+                <li><a href="#list-property">LIST YOUR PROPERTY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#more">MORE</a></li>
+            </ul>
+            <div class="icons">
+                <i class="fas fa-language"></i>
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container-navbar">
+                <div>PROPERTY DETAILS</div>
+                <div style=" border-bottom: 5px solid #122B49;">LOCATION DETAILS</div>
+                <div class="active">FEATURES & AMENITIES</div>
+                <div>PRICE DETAILS</div>
+                <div>PROPERTY IMAGES</div>
+            </div>
+            <div class="body-content">
+                <div class="form-group">
+                    <label class="section-title">General Features</label>
+                    
+                    <div class="form-group">
+                        <label>Non-Veg <span style="color: red;">*</span></label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" name="nonVeg" value="allowed"> Allowed
+                            </div>
+                            <div>
+                                <input type="radio" name="nonVeg" value="notAllowed"> Not Allowed
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Pets Allowed <span style="color: red;">*</span></label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" name="petsAllowed" value="yes"> Yes
+                            </div>
+                            <div>
+                                <input type="radio" name="petsAllowed" value="no"> No
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Electricity <span style="color: red;">*</span></label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" name="electricity" value="rare"> Rare/No Powercut
+                            </div>
+                            <div>
+                                <input type="radio" name="electricity" value="frequent"> Frequent Powercut
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Water Supply <span style="color: red;">*</span></label>
+                        <div class="radio-group">
+                            <div>
+                                <input type="radio" name="waterSupply" value="municipal"> Municipal Corporation (BMC)
+                            </div>
+                            <div>
+                                <input type="radio" name="waterSupply" value="borewell"> Borewell
+                            </div>
+                            <div>
+                                <input type="radio" name="waterSupply" value="both"> Both
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Furnishing <span style="color: red;">*</span></label>
+                        <div class="checkbox-group">
+                            <div>
+                                <input type="checkbox" name="furnishing" value="fullyFurnished"> Fully Furnished
+                            </div>
+                            <div>
+                                <input type="checkbox" name="furnishing" value="semiFurnished"> Semi Furnished
+                            </div>
+                            <div>
+                                <input type="checkbox" name="furnishing" value="unfurnished"> Unfurnished
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Additional Features</label>
+                        <div class="checkbox-group">
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="airConditioning"> Air Conditioning
+                            </div>
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="ceilingFans"> Ceiling Fans
+                            </div>
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="refrigerator"> Refrigerator
+                            </div>
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="washingMachine"> Washing Machine
+                            </div>
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="microwave"> Microwave
+                            </div>
+                            <div>
+                                <input type="checkbox" name="additionalFeatures" value="oven"> Oven
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Tiles</label>
+                        <div class="checkbox-group">
+                            <div>
+                                <input type="checkbox" name="tiles" value="normalWhite"> Normal White Tiles
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tiles" value="marble"> Marble
+                            </div>
+                            <div>
+                                <input type="checkbox" name="tiles" value="vitrified"> Vitrified Tiles
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label>Safety <span style="color: red;">*</span></label>
+                        <div class="checkbox-group">
+                            <div>
+                                <input type="checkbox" name="safety" value="securityPersonnel"> 24/7 Security personnel (Gated Security)
+                            </div>
+                            <div>
+                                <input type="checkbox" name="safety" value="cctv"> Security Systems - CCTV
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="form-group">
+                        <label class="section-title">Society Amenities</label>
+                        <div class="checkbox-group">
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="security"> 24/7 Security
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="cctv"> CCTV Camera
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="lift"> Lift
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="parking"> Reserved Parking
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="waterSupply"> Regular Water Supply
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="powerPartial"> Power Back up - Partial
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="powerFull"> Power Back up - Full
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="maintenance"> Maintenance Staff
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="garden"> Garden/Park
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="kidsPlay"> Kids Play Area
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="sport"> Sport
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="gym"> Property Gym
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="hall"> Community Hall
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="shopping"> Shopping Center
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="clubHouse"> Club House
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="swimming"> Swimming Pool
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="intercom"> Intercom
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="fireSafety"> Fire Safety
+                            </div>
+                            <div>
+                                <input type="checkbox" name="societyAmenities" value="clubHouseSwimming"> Club House Swimming Pool
+                            </div>
+                        </div>
+                    </div>
+            
+                </div>
+            </div>
+            
+            <div class="lower">
+                <div class="help">Need Help? Call 9999999999</div>
+                <button type="submit" class="btn">Next</button>
+            </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nextButton = document.querySelector(".btn");
+    
+            nextButton.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                window.location.href = "5PropertyPriceDetails.html"; // Redirect to the next page
+            });
+        });
+    </script>
+</body>
+</html>

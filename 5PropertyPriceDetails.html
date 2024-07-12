@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCF8F4;
+            color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+        }
+        .navbar .nav-links li {
+            margin: 0 10px;
+        }
+        .navbar .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar .nav-links li:last-child {
+            border-right: 2px solid black;
+            padding-right: 10px;
+        }
+        .navbar .icons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .icons i {
+            margin: 0 10px;
+            font-size: 18px;
+        }
+
+        /* Container styles */
+        .container {
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 4px solid #F2F3F5;
+            display: flex;
+            flex-direction: column;
+            height: calc(97vh - 90px); /* Adjust height minus navbar */
+        }
+        .container-navbar {
+            display: flex;
+            background-color: #FCF8F4;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #d6d6d6;
+            flex: 0 0 60px;
+        }
+        .container-navbar div {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+        .container-navbar div:last-child {
+            border-right: none;
+        }
+        .container-navbar div.active {
+            background-color: #e0e0e0;
+            border-bottom: 5px solid #d6d6d6;
+        } 
+        .container-navbar div:first-child {
+            border-bottom: 5px solid #122B49;
+        }
+
+        /* Form and content styles */
+        .body-content {
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+            flex: 1;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .half-width {
+            width: 48%;
+            display: inline-block;
+        }
+        .spacer {
+            width: 4%;
+            display: inline-block;
+        }
+        .lower {
+            display: flex;
+            background-color: #122B49;
+            justify-content: space-around;
+            padding: 10px;
+            align-items: center;
+            flex: 0 0 50px;
+        }
+        .lower button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px; 
+            margin: 4px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .help {
+            text-align: center;
+            color: #fff;
+            flex: 1;
+        }
+        .rent-security {
+            display: flex;
+            margin: 20px;
+        }
+        #maintenance {
+            display: flex;
+        }
+        #maintenance-part {
+            display: flex;
+        }
+        #text-area {
+            margin-top: 20px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .navbar .nav-links li {
+                margin: 0 5px;
+            }
+            .navbar .nav-links li a {
+                font-size: 12px;
+            }
+            .container-navbar div {
+                padding: 10px;
+                font-size: 12px;
+            }
+            .rent-security, #maintenance {
+                flex-direction: column;
+            }
+            .half-width, .spacer {
+                width: 100%;
+            }
+            .spacer {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .nav-links li {
+                margin: 0 3px;
+            }
+            .navbar .nav-links li a {
+                font-size: 10px;
+            }
+            .container-navbar div {
+                padding: 8px;
+                font-size: 10px;
+            }
+            .navbar .icons i {
+                font-size: 14px;
+            }
+            .lower button {
+                padding: 8px;
+                margin: 2px;
+                font-size: 12px;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://resource.rentcafe.com/image/upload/x_0,y_0,w_2550,h_1455,c_crop/q_auto,f_auto,c_limit,w_263,h_150/s3/2/102601/the%20dylan_logo%20final%20with%20orange-01%20(1).jpg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#properties">PROPERTIES</a></li>
+                <li><a href="#dashboard">MY DASHBOARD/ACTIVITY</a></li>
+                <li><a href="#list-property">LIST YOUR PROPERTY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#more">MORE</a></li>
+            </ul>
+            <div class="icons">
+                <i class="fas fa-language"></i>
+                <i class="fas fa-user"></i>
+            </div>
+        </div>
+        <div class="container">
+            <div class="container-navbar">
+                <div>PROPERTY DETAILS</div>
+                <div style=" border-bottom: 5px solid #122B49;">LOCATION DETAILS</div>
+                <div style=" border-bottom: 5px solid #122B49;">FEATURES & AMENITIES</div>
+                <div class="active">PRICE DETAILS</div>
+                <div>PROPERTY IMAGES</div>
+            </div>
+            <div class="body-content">
+                <form>
+                    <div class="rent-security">
+                        <div class="form-group half-width">
+                            <label for="rent">Rent *</label>
+                            <input type="text" id="rent" name="rent" placeholder="₹ / Month" required>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="form-group half-width">
+                            <label for="security">Security *</label>
+                            <input type="text" id="security" name="security" placeholder="₹ / Month" required>
+                        </div>
+                    </div>
+                    <div id="maintenance">
+                        <div class="form-group half-width">
+                            <label for="maintenance">Maintenance *</label>
+                            <select id="maintenance" name="maintenance" required>
+                                <option value="included">Included in Rent</option>
+                                <option value="extra">Extra Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="spacer"></div>
+                        <div class="form-group half-width">
+                            <label for="maintenance-amount">Maintenance *</label>
+                            <div id="maintenance-part">
+                                <input type="text" id="maintenance-amount" name="maintenance-amount" placeholder="₹ Maintenance" required>
+                                <select id="maintenance-frequency" name="maintenance-frequency" required>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="text-area">
+                        <label for="additional-details">Additional Pricing details to convey to agent?</label>
+                        <textarea id="additional-details" name="additional-details" rows="4" placeholder="Do you have any concerns regarding pricing of your property? Add your concerns here or call us." style="resize: none;"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="lower">
+                <div class="help">Need Help? Call 9999999999</div>
+                <button type="submit" class="btn">Next</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nextButton = document.querySelector(".btn");
+    
+            nextButton.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                window.location.href = "6PropertyPhotos.html"; // Redirect to the next page
+            });
+        });
+    </script>
+</body>
+</html>

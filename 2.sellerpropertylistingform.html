@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+      .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCF8F4;
+            color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+        }
+        .navbar .nav-links li {
+            margin: 0 10px;
+        }
+        .navbar .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar .nav-links li:last-child {
+            border-right: 2px solid black;
+            padding-right: 10px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+         .container {
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 4px solid #F2F3F5;
+            display: flex;
+            flex-direction: column;
+            height: calc(93vh - 90px); /* Adjust height minus navbar */
+        }
+        .container-navbar {
+            height: auto;
+            width: 100%;
+            display: flex;
+            background-color: #FCF8F4;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            /* border-bottom: 1px solid #e0e0e0; */
+            border-bottom: 5px solid #d6d6d6;
+        }
+        .container-navbar div {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+        .container-navbar div:last-child {
+            border-right: none;
+        }
+        .container-navbar div.active {
+            background-color: #e0e0e0;
+            border-bottom: 5px solid #d6d6d6;
+        }
+        .body-content {
+            overflow-y: auto;
+            max-height: 300px;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="radio"],
+        .form-group input[type="number"],
+        .form-group input[type="text"],
+        .form-group select {
+            margin-right: 10px;
+        }
+        .form-group .radio-group,
+        .form-group .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .form-group .radio-group div,
+        .form-group .checkbox-group div {
+            margin-right: 20px;
+            margin-bottom: 10px;
+        }
+        .form-group input[type="number"],
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .lower {
+            display: flex;
+            background-color: #122B49;
+            justify-content: space-around;
+            padding: 10px;
+            align-items: center;
+            flex: 0 0 50px;
+        }
+        .lower button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px; 
+            margin: 4px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .help {
+            text-align: center;
+            color: #fff;
+            flex: 1;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar .nav-links li {
+                margin: 5px 0;
+            }
+            .container-navbar {
+                flex-direction: column;
+            }
+            .container-navbar div {
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .container-navbar div:last-child {
+                border-bottom: none;
+            }
+            .form-group input[type="number"],
+            .form-group input[type="text"],
+            .form-group select,
+            .form-group textarea {
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar .logo img {
+                height: 30px;
+            }
+            .navbar .nav-links li a {
+                font-size: 12px;
+            }
+            .btn {
+                padding: 10px;
+            }
+            .lower button {
+                width: 60px;
+                padding: 5px;
+            }
+        }
+           </style>
+</head>
+<body>
+
+    <div>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://resource.rentcafe.com/image/upload/x_0,y_0,w_2550,h_1455,c_crop/q_auto,f_auto,c_limit,w_263,h_150/s3/2/102601/the%20dylan_logo%20final%20with%20orange-01%20(1).jpg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#properties">PROPERTIES</a></li>
+                <li><a href="#dashboard">MY DASHBOARD/ACTIVITY</a></li>
+                <li><a href="#list-property">LIST YOUR PROPERTY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#more">MORE</a></li>
+            </ul>
+            <div class="icons">
+                <i class="fas fa-language"></i>
+                <i class="fas fa-user"></i>         
+            </div>
+        </div>
+    <div class="container">
+        <div class="container-navbar">
+            <div class="active">PROPERTY DETAILS</div>
+            <div>LOCATION DETAILS</div>
+            <div>FEATURES & AMENITIES</div>
+            <div>PRICE DETAILS</div>
+            <div>PROPERTY IMAGES</div>
+        </div>
+        <form action="3Propertylocationsection.html" method="get">
+            <div class="body-content">
+            <div class="form-group">
+                <label for="property-for">Property For:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="rent" name="property-for" value="rent">
+                        <label for="rent">Rent</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sale" name="property-for" value="sale">
+                        <label for="sale">Sale</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="property-type">Property Type:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="residential" name="property-type" value="residential">
+                        <label for="residential">Residential</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="commercial" name="property-type" value="commercial">
+                        <label for="commercial">Commercial</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="land" name="property-type" value="land">
+                        <label for="land">Land / Plot</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="built-up-area">Built up Area:</label>
+                <input type="number" id="built-up-area" name="built-up-area" placeholder="Sq. Ft.">
+            </div>
+            <div class="form-group">
+                <label for="carpet-area">Carpet Area:</label>
+                <input type="number" id="carpet-area" name="carpet-area" placeholder="Sq. Ft.">
+            </div>
+            <div class="form-group">
+                <label for="property-on-floor">Property on Floor:</label>
+                <input type="number" id="property-on-floor" name="property-on-floor" placeholder="Floor">
+            </div>
+            <div class="form-group">
+                <label for="total-floors">Total Floors:</label>
+                <input type="number" id="total-floors" name="total-floors" placeholder="Total Floors">
+            </div>
+            <div class="form-group">
+                <label for="property-facing">Property Facing:</label>
+                <select id="property-facing" name="property-facing">
+                    <option value="select">Select</option>
+                    <!-- Add options here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Property Age:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="less-than-1" name="property-age" value="less-than-1">
+                        <label for="less-than-1">Less than 1 Year</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="1-3" name="property-age" value="1-3">
+                        <label for="1-3">1-3 Years</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="3-5" name="property-age" value="3-5">
+                        <label for="3-5">3-5 Years</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="5-10" name="property-age" value="5-10">
+                        <label for="5-10">5-10 Years</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="greater-than-10" name="property-age" value="greater-than-10">
+                        <label for="greater-than-10">Greater than 10 Years</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>BHK Type:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="1rk" name="bhk-type" value="1rk">
+                        <label for="1rk">1 RK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="1bhk" name="bhk-type" value="1bhk">
+                        <label for="1bhk">1 BHK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="2bhk" name="bhk-type" value="2bhk">
+                        <label for="2bhk">2 BHK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="3bhk" name="bhk-type" value="3bhk">
+                        <label for="3bhk">3 BHK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="4bhk" name="bhk-type" value="4bhk">
+                        <label for="4bhk">4 BHK</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="5bhk" name="bhk-type" value="5bhk">
+                        <label for="5bhk">5+ BHK</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Bathrooms/Toilets:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="1bath" name="bathrooms" value="1">
+                        <label for="1bath">1</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="2bath" name="bathrooms" value="2">
+                        <label for="2bath">2</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="3bath" name="bathrooms" value="3">
+                        <label for="3bath">3</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="4bath" name="bathrooms" value="4">
+                        <label for="4bath">4</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="5bath" name="bathrooms" value="5">
+                        <label for="5bath">5</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="6plusbath" name="bathrooms" value="6+">
+                        <label for="6plusbath">6+</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Balcony:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="0balcony" name="balcony" value="0">
+                        <label for="0balcony">0</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="1balcony" name="balcony" value="1">
+                        <label for="1balcony">1</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="2balcony" name="balcony" value="2">
+                        <label for="2balcony">2</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="3balcony" name="balcony" value="3">
+                        <label for="3balcony">3</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="4plusbalcony" name="balcony" value="4+">
+                        <label for="4plusbalcony">4+</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Tenant Preference:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="any" name="tenant-preference" value="any">
+                        <label for="any">Any</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="family" name="tenant-preference" value="family">
+                        <label for="family">Family</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="bachelor-men" name="tenant-preference" value="bachelor-men">
+                        <label for="bachelor-men">Bachelor (Men)</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="bachelor-women" name="tenant-preference" value="bachelor-women">
+                        <label for="bachelor-women">Bachelor (Women)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Availability:</label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="immediate" name="availability" value="immediate">
+                        <label for="immediate">Immediate</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="within-15-days" name="availability" value="within-15-days">
+                        <label for="within-15-days">Within 15 days</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="within-1-month" name="availability" value="within-1-month">
+                        <label for="within-1-month">Within 1 month</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="within-2-months" name="availability" value="within-2-months">
+                        <label for="within-2-months">Within 2 months</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="property-description">Property Description:</label>
+                <textarea id="property-description" name="property-description" placeholder="Add a description for your property to attract the best tenant"></textarea>
+            </div>
+        </div>
+        </form>
+        <div class="lower">
+        <div class="help">Need Help? Call 9999999999</div>
+        <button type="submit" class="btn">Next</button>
+    </div>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const nextButton = document.querySelector(".btn");
+
+        nextButton.addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            window.location.href = "3Propertylocationsection.html"; // Redirect to the next page
+        });
+    });
+</script>
+</body>
+</html>

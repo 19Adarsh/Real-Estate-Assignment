@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dylan Estate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+     <style>
+          .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCF8F4;
+            color: black;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .logo img {
+            height: 40px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+        }
+        .navbar .nav-links li {
+            margin: 0 10px;
+        }
+        .navbar .nav-links li a {
+            color: black;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+        .navbar .nav-links li:last-child {
+            border-right: 2px solid black;
+            padding-right: 10px;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 70%;
+            max-width: 1200px;
+            margin: auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            border: 4px solid #F2F3F5;
+            height: calc(93vh - 90px);
+        }
+        .container-navbar {
+            height: auto;
+            width: 100%;
+            display: flex;
+            background-color: #FCF8F4;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-bottom: 5px solid #d6d6d6;
+            flex-wrap: wrap;
+        }
+        .container-navbar div {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border-right: 1px solid #e0e0e0;
+            font-weight: bold;
+        }
+        .container-navbar div:last-child {
+            border-right: none;
+        }
+        .container-navbar div.active {
+            background-color: #e0e0e0;
+            border-bottom: 5px solid #d6d6d6;
+        }
+        .container-navbar div:first-child{
+            border-bottom: 5px solid #122B49;
+        }
+        .body-content{
+            margin: 20px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            max-width: 45%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .map {
+            height: 300px;
+            width: 100%;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .lower {
+            display: flex;
+            background-color: #122B49;
+            justify-content: space-around;
+            padding: 10px;
+            align-items: center;
+            flex: 0 0 50px;
+        }
+        .lower button {
+            background-color: #122B49;
+            color: white;
+            padding: 10px; 
+            margin: 4px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid white;
+        }
+        .help {
+            text-align: center;
+            color: #fff;
+            flex: 1;
+        }
+       
+        .fa-map-marker-alt {
+            position: absolute;
+            left: 10px;
+            top: 40px; /* Adjust based on your input height */
+            color: #888;
+        }
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                flex-direction: column;
+                display: none;
+            }
+            .navbar .nav-links li {
+                margin: 10px 0;
+            }
+            .container {
+                width: 90%;
+            }
+            .container-navbar div {
+                flex: 100%;
+                border-right: none;
+                border-bottom: 1px solid #e0e0e0;
+            }
+            .container-navbar div:last-child {
+                border-bottom: none;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar .logo img {
+                height: 30px;
+            }
+            .navbar .icons {
+                display: none;
+            }
+            .container-navbar div {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://resource.rentcafe.com/image/upload/x_0,y_0,w_2550,h_1455,c_crop/q_auto,f_auto,c_limit,w_263,h_150/s3/2/102601/the%20dylan_logo%20final%20with%20orange-01%20(1).jpg" alt="Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#properties">PROPERTIES</a></li>
+                <li><a href="#dashboard">MY DASHBOARD/ACTIVITY</a></li>
+                <li><a href="#list-property">LIST YOUR PROPERTY</a></li>
+                <li><a href="#contact">CONTACT US</a></li>
+                <li><a href="#more">MORE</a></li>
+            </ul>
+            <div class="icons">
+                <i class="fas fa-language"></i>
+                <i class="fas fa-user"></i>         
+            </div>
+        </div>
+    <div class="container">
+        <div class="container-navbar">
+            <div>PROPERTY DETAILS</div>
+            <div  class="active">LOCATION DETAILS</div>
+            <div>FEATURES & AMENITIES</div>
+            <div>PRICE DETAILS</div>
+            <div>PROPERTY IMAGES</div>
+        </div>
+
+        <div class="body-content">
+            <div class="form-group">
+                <label for="buildingName">Building/ Society Name <span style="color: red;">*</span></label>
+                <input type="text" id="buildingName" placeholder="Enter Apartment Name">
+            </div>
+        
+            <div class="form-group">
+                <label for="locality">Locality / Area <span style="color: red;">*</span></label>
+                <input type="text" id="locality" placeholder="Eg: Sheetal Nagar">
+            </div>
+        
+            <div class="form-group">
+                <label for="landmark">Landmark / Street Name</label>
+                <input type="text" id="landmark" placeholder="Prominent Landmark">
+            </div>
+        
+            <div class="form-group">
+                <label for="city">City</label>
+                <select id="city">
+                    <option value="Mumbai, Maharashtra">Mumbai, Maharashtra</option>
+                    <!-- Add more cities as options here -->
+                </select>
+            </div>
+        
+            <div class="form-group">
+                <label for="map">Mark Locality on Map</label>
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" id="map" placeholder="&#xf3c5; Search your society or nearest landmark">
+            </div>
+            <div class="map" id="mapContainer">
+                <iframe
+                    width="100%"
+                    height="300"
+                    frameborder="0" style="border:0"
+                    src="https://www.googlemaps.com" allowfullscreen>
+                </iframe>
+            </div>
+        
+        </div>
+
+        <div class="lower">
+            <div class="help">Need Help? Call 9999999999</div>
+            <button type="submit" class="btn">Next</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nextButton = document.querySelector(".btn");
+    
+            nextButton.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                window.location.href = "4PropertyFeaturesAndAmenties.html"; // Redirect to the next page
+            });
+        });
+    </script>
+</body>
+</html>
